@@ -367,33 +367,40 @@ function renderGentiliSlides() {
   const grid = document.getElementById('gentili-slides-grid');
   if (!grid) return;
 
-  grid.innerHTML = portfolioCollections.gentili.map((s, idx) => `
-    <div onclick="openLightbox('gentili', ${idx})" class="cursor-pointer group rounded-2xl bg-surface-container/85 border border-primary-container/30 backdrop-blur-xl overflow-hidden flex flex-col justify-between hover:border-primary/70 transition-all duration-300 slide-card-hover shadow-lg">
-      <div class="flex flex-col">
-        <div class="relative w-full aspect-video overflow-hidden bg-[#f4f4f2] border-b border-primary-container/20">
-          <img src="${resolveInitialSrc(s)}" alt="${s.title}" loading="lazy" decoding="async"
-            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-            onerror="handleImageError(this, 'gentili', ${idx})">
-          <div class="absolute top-2 left-2 px-2 py-0.5 rounded bg-surface/90 text-white font-label-sm text-[10px] backdrop-blur-md border border-primary/25">Slayt ${s.slideNum}</div>
-          <div class="absolute inset-0 bg-primary-container/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-            <span class="w-9 h-9 rounded-full bg-surface/90 text-white flex items-center justify-center shadow-lg border border-primary/40">
-              <span class="material-symbols-outlined text-[18px]">zoom_in</span>
+  // 26 slayt tek bir kartta toplanır; tıklayınca tam ekran slayt gösterisi açılır.
+  const slides = portfolioCollections.gentili;
+  const cover = slides[0];
+  grid.className = 'grid grid-cols-1';
+  grid.innerHTML = `
+    <div class="pr-3 pb-3 max-w-3xl w-full">
+      <div onclick="openLightbox('gentili', 0)" onkeydown="if(event.key==='Enter'){openLightbox('gentili', 0)}" role="button" tabindex="0" aria-label="Gentili Aesthetics sunumunu aç"
+        class="cursor-pointer group relative slide-card-hover">
+        <div class="absolute inset-0 translate-x-3 translate-y-3 rounded-2xl bg-surface-container-high/60 border border-primary-container/20"></div>
+        <div class="absolute inset-0 translate-x-1.5 translate-y-1.5 rounded-2xl bg-surface-container/80 border border-primary-container/25"></div>
+        <div class="relative rounded-2xl bg-surface-container/90 border border-primary-container/30 group-hover:border-primary/70 overflow-hidden shadow-xl transition-colors">
+          <div class="relative w-full aspect-video overflow-hidden bg-[#f4f4f2]">
+            <img src="${resolveInitialSrc(cover)}" alt="${cover.title}" loading="lazy" decoding="async"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              onerror="handleImageError(this, 'gentili', 0)">
+            <div class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-surface/90 text-white font-label-sm text-[11px] backdrop-blur-md border border-primary/25">${slides.length} Slayt</div>
+            <div class="absolute inset-0 bg-primary-container/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+              <span class="w-12 h-12 rounded-full bg-surface/90 text-white flex items-center justify-center shadow-lg border border-primary/40">
+                <span class="material-symbols-outlined text-[24px]">slideshow</span>
+              </span>
+            </div>
+          </div>
+          <div class="p-space-md flex flex-col gap-2">
+            <span class="font-label-sm text-[11px] text-primary font-bold uppercase tracking-wider">Gentili Aesthetics • 16:9 Sunum</span>
+            <h4 class="font-headline-sm text-[16px] text-white font-bold leading-snug">Medikal Estetik İş Birimi — Yönetim Kurulu Strateji Sunumu</h4>
+            <p class="font-body-md text-[13px] text-on-surface-variant leading-relaxed">Üründen pazara uçtan uca yönetişim, Stage-Gate onay süreci, lansman planı, finans ve risk yönetimini kapsayan ${slides.length} slaytlık sunum.</p>
+            <span class="inline-flex items-center gap-1.5 self-start mt-1 px-space-md py-space-xs rounded-full bg-primary-container group-hover:bg-inverse-primary text-white font-label-md text-label-md transition-colors">
+              <span class="material-symbols-outlined text-[18px]">slideshow</span><span>Sunumu Aç</span>
             </span>
           </div>
         </div>
-        <div class="p-3.5 flex flex-col gap-1">
-          <span class="font-label-sm text-[10px] text-primary font-bold uppercase tracking-wider">${s.tag}</span>
-          <h4 class="font-headline-sm text-[14px] text-white font-bold leading-snug line-clamp-2">${s.title}</h4>
-          <p class="font-body-md text-[12px] text-on-surface-variant line-clamp-2 leading-relaxed mt-0.5">${s.desc}</p>
-        </div>
       </div>
-      <div class="px-3.5 py-2 border-t border-surface-container-high flex items-center justify-between bg-surface-container-high/35 text-[11px] font-label-sm text-outline">
-        <span>16:9 • ${s.dimensions}</span>
-        <span class="text-primary group-hover:translate-x-0.5 transition-transform flex items-center gap-0.5">İncele <span class="material-symbols-outlined text-[13px]">arrow_forward</span></span>
-      </div>
-    </div>`).join('');
+    </div>`;
 }
-
 function renderNewBrands() {
   const fpGrid = document.getElementById('fpakademi-grid');
   if (fpGrid) {
@@ -590,16 +597,6 @@ if (contactForm) {
     contactForm.reset();
     setTimeout(() => formFeedback.classList.add('hidden'), 6000);
   });
-}
-
-function triggerCvDownload() {
-  const a = document.createElement('a');
-  a.href = 'Muharrem-Ceylan-CV.pdf';
-  a.download = 'Muharrem-Ceylan-CV.pdf';
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  showToast("CV indiriliyor...", 3000);
 }
 
 function initSkillBarAnimation() {

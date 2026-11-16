@@ -261,9 +261,16 @@ const portfolioCollections = {
    ========================================================= */
 const uploadedBlobMap = {};
 
+// Kartlarda küçük önizleme (images/thumb/…jpg), tam ekranda orijinal görsel kullanılır.
 function resolveInitialSrc(item) {
   const key = item.file.toLowerCase();
-  return uploadedBlobMap[key] || item.file;
+  const thumb = item.file + ".jpg"; // örn. "Artboard 3.png.jpg" (png/jpg adı çakışmasın)
+  return uploadedBlobMap[key] || ("images/thumb/" + encodeURI(thumb));
+}
+
+function resolveFullSrc(item) {
+  const key = item.file.toLowerCase();
+  return uploadedBlobMap[key] || ("images/" + encodeURI(item.file));
 }
 
 function handleImageError(imgEl, collectionKey, index) {
@@ -273,7 +280,7 @@ function handleImageError(imgEl, collectionKey, index) {
 
   if (stage === 0) {
     imgEl.dataset.fallbackStage = "1";
-    imgEl.src = "images/" + item.file;
+    imgEl.src = resolveFullSrc(item);
     return;
   }
   if (stage === 1 && item.fallbackUrl) {
@@ -313,7 +320,7 @@ function buildBrandCardHTML(item, key, idx, brandLabel, accentClass, badgeBgClas
   return `
     <div onclick="openLightbox('${key}', ${idx})" class="cursor-pointer group rounded-2xl bg-surface-container/85 border border-primary-container/30 backdrop-blur-xl overflow-hidden flex flex-col justify-between hover:border-primary/70 transition-all duration-300 slide-card-hover shadow-xl">
       <div class="relative w-full ${item.aspectClass} overflow-hidden bg-surface-container-lowest flex items-center justify-center">
-        <img src="${resolveInitialSrc(item)}" alt="${item.title}" loading="lazy"
+        <img src="${resolveInitialSrc(item)}" alt="${item.title}" loading="lazy" decoding="async"
           class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           onerror="handleImageError(this, '${key}', ${idx})">
         <div class="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent opacity-85 pointer-events-none"></div>
@@ -364,7 +371,7 @@ function renderGentiliSlides() {
     <div onclick="openLightbox('gentili', ${idx})" class="cursor-pointer group rounded-2xl bg-surface-container/85 border border-primary-container/30 backdrop-blur-xl overflow-hidden flex flex-col justify-between hover:border-primary/70 transition-all duration-300 slide-card-hover shadow-lg">
       <div class="flex flex-col">
         <div class="relative w-full aspect-video overflow-hidden bg-[#f4f4f2] border-b border-primary-container/20">
-          <img src="${resolveInitialSrc(s)}" alt="${s.title}" loading="lazy"
+          <img src="${resolveInitialSrc(s)}" alt="${s.title}" loading="lazy" decoding="async"
             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             onerror="handleImageError(this, 'gentili', ${idx})">
           <div class="absolute top-2 left-2 px-2 py-0.5 rounded bg-surface/90 text-white font-label-sm text-[10px] backdrop-blur-md border border-primary/25">Slayt ${s.slideNum}</div>
@@ -413,7 +420,7 @@ function renderUnifiedShowcaseGrid() {
       class="showcase-card cursor-pointer rounded-2xl bg-surface-container/80 border border-primary-container/30 backdrop-blur-xl p-space-md flex flex-col justify-between gap-space-sm hover:border-primary/60 transition-all duration-300 group slide-card-hover">
       <div class="flex flex-col gap-space-sm">
         <div class="w-full h-52 rounded-xl overflow-hidden relative bg-surface-container-high">
-          <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" alt="${p.title}" loading="lazy"
+          <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" alt="${p.title}" loading="lazy" decoding="async"
             src="${resolveInitialSrc(p)}" onerror="handleImageError(this, '${p.collectionKey}', ${p.collectionIdx})">
           <div class="absolute top-2.5 right-2.5 px-2 py-0.5 rounded bg-surface/85 text-white font-label-sm text-[10px] backdrop-blur-md border border-primary/20">${p.showcaseCat}</div>
         </div>
@@ -534,7 +541,7 @@ function updateLightboxView() {
 
   imgEl.dataset.fallbackStage = "0";
   imgEl.onerror = () => handleImageError(imgEl, activeCollectionKey, activeIndex);
-  imgEl.src = resolveInitialSrc(item);
+  imgEl.src = resolveFullSrc(item);
   imgEl.alt = item.title;
 
   document.getElementById('lightbox-thumbs').innerHTML = multi ? list.map((s, i) => `
@@ -586,8 +593,13 @@ if (contactForm) {
 }
 
 function triggerCvDownload() {
-  // Gerçek CV için: <a href="cv.pdf" download> kullanın veya burada window.open('cv.pdf') çağırın.
-  showToast("Muharrem Ceylan (MULVN) Portfolyo & CV (PDF) özeti indiriliyor...", 4000);
+  const a = document.createElement('a');
+  a.href = 'Muharrem-Ceylan-CV.pdf';
+  a.download = 'Muharrem-Ceylan-CV.pdf';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  showToast("CV indiriliyor...", 3000);
 }
 
 function initSkillBarAnimation() {
@@ -619,7 +631,7 @@ function initThreeHero() {
 
   const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
   renderer.setSize(container.clientWidth, container.clientHeight);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
   container.appendChild(renderer.domElement);
 
   const mainGroup = new THREE.Group();
@@ -691,8 +703,15 @@ function initThreeHero() {
     mainGroup.position.x = w > 1024 ? 2.1 : (w > 640 ? 1.0 : 0);
   });
 
+  // Hero ekranda değilken 3B animasyonu durdur (kasmayı azaltır).
+  let heroVisible = true;
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(([entry]) => { heroVisible = entry.isIntersecting; }).observe(container);
+  }
+
   (function animate() {
     requestAnimationFrame(animate);
+    if (!heroVisible) return;
     wireframeIco.rotation.y += 0.006; wireframeIco.rotation.x += 0.003;
     innerCrystal.rotation.y -= 0.009; innerCrystal.rotation.z += 0.005;
     rings.forEach((r, i) => { r.mesh.rotation.z += 0.004 * (i % 2 === 0 ? 1 : -1); r.mesh.rotation.y += 0.003; });

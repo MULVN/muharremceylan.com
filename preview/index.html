@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html class="dark scroll-smooth" lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Muharrem Ceylan (MULVN) — Grafik Tasarımcı &amp; UI/UX Mimarı</title>
+
+  <!-- Fontlar -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Syne:wght@700;800&family=Playfair+Display:ital,wght@0,700;1,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+
+  <!-- Tailwind (CDN) + yapılandırma + three.js -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="tailwind.config.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <!-- Özel CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-background font-body-md text-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container">
+
+  <!-- HEADER -->
+  <header class="fixed top-0 inset-x-0 z-40 bg-surface-container-lowest/85 backdrop-blur-xl border-b border-primary-container/15 shadow-[0_1px_12px_rgba(0,0,0,0.25)]">
+    <div class="h-20 w-full max-w-7xl mx-auto px-margin-sm md:px-margin-md lg:px-margin-xl flex items-center justify-between gap-space-md">
+      <div class="flex items-center gap-space-lg">
+        <a class="flex items-center font-headline-md text-headline-md text-on-surface tracking-tight font-bold" href="#hero">
+          <span class="tracking-wider">Muharrem</span><span class="text-primary-container font-extrabold">.</span>
+        </a>
+        <div class="hidden lg:flex items-center gap-space-xs px-space-sm py-space-xs rounded-full bg-surface-container-low border border-primary-container/20">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+          </span>
+          <span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant">Q3 Uygunluk</span>
+        </div>
+      </div>
+
+      <nav class="hidden md:flex items-center gap-space-xs p-space-xs rounded-full bg-surface-container-low/70 border border-primary-container/20 backdrop-blur-md">
+        <a class="px-space-md py-space-xs rounded-full font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all duration-200" href="#vaka-analizleri">Markalar</a>
+        <a class="px-space-md py-space-xs rounded-full font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all duration-200" href="#tasarim-vitrini">Tasarım Vitrini</a>
+        <a class="px-space-md py-space-xs rounded-full font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all duration-200" href="#yetenekler">Yetenekler</a>
+        <a class="px-space-md py-space-xs rounded-full font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all duration-200" href="#iletisim">İletişim</a>
+      </nav>
+
+      <div class="flex items-center gap-space-sm">
+        <button type="button" onclick="document.getElementById('local-folder-input').click()" class="inline-flex items-center gap-1.5 px-space-md py-space-xs rounded-full bg-surface-container-high hover:bg-primary-container border border-primary/35 text-on-surface hover:text-white font-label-md text-label-md transition-all duration-200" title="Bilgisayarındaki görsel klasörünü seçerek canlı önizle">
+          <span class="material-symbols-outlined text-[18px] text-primary">folder_open</span>
+          <span class="hidden sm:inline">Görselleri Yükle</span>
+        </button>
+        <input type="file" id="local-folder-input" multiple accept="image/*" class="hidden">
+        <a class="hidden md:inline-flex items-center justify-center px-space-lg py-space-xs rounded-full bg-primary-container text-white font-label-lg text-label-lg shadow-[0_0_24px_rgba(105,55,158,0.45)] hover:scale-105 hover:bg-inverse-primary transition-all duration-200" href="#iletisim">İletişime Geç</a>
+        <button id="mobile-menu-btn" aria-label="Menüyü Aç" class="md:hidden w-9 h-9 rounded-full bg-surface-container-high border border-primary/20 flex items-center justify-center text-on-surface">
+          <span class="material-symbols-outlined text-[20px]">menu</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobil menü -->
+    <div id="mobile-menu" class="hidden md:hidden bg-surface-container-lowest/95 backdrop-blur-xl border-b border-primary-container/30 px-margin-sm py-space-md">
+      <div class="flex flex-col gap-space-xs">
+        <a class="mobile-nav-link px-space-md py-space-sm rounded-xl text-on-surface hover:bg-surface-container-high font-label-lg" href="#vaka-analizleri">Markalar &amp; Projeler</a>
+        <a class="mobile-nav-link px-space-md py-space-sm rounded-xl text-on-surface hover:bg-surface-container-high font-label-lg" href="#tasarim-vitrini">Tasarım Vitrini</a>
+        <a class="mobile-nav-link px-space-md py-space-sm rounded-xl text-on-surface hover:bg-surface-container-high font-label-lg" href="#yetenekler">Yetenekler</a>
+        <a class="mobile-nav-link px-space-md py-space-sm rounded-xl text-on-surface hover:bg-surface-container-high font-label-lg" href="#iletisim">İletişim</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="w-full pt-20 bg-background min-h-screen">
+    <div class="flex flex-col w-full">
+
+      <!-- HERO -->
+      <section id="hero" class="relative w-full overflow-hidden px-margin-sm md:px-margin-md lg:px-margin-xl py-space-xl lg:py-space-2xl min-h-[700px] lg:min-h-[820px] flex items-center">
+        <div class="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-primary-container/25 blur-[140px] pointer-events-none -z-10"></div>
+        <div class="absolute bottom-10 right-10 w-[600px] h-[600px] rounded-full bg-secondary-container/20 blur-[160px] pointer-events-none -z-10"></div>
+
+        <!-- Three.js sahnesi -->
+        <div class="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden" id="hero-3d-scene"></div>
+
+        <div class="max-w-7xl mx-auto w-full relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-gutter-lg items-center">
+          <div class="lg:col-span-8 flex flex-col items-start gap-space-lg relative z-10">
+            <div class="inline-flex items-center gap-space-sm px-space-md py-space-xs rounded-full bg-surface-container-high/80 border border-primary/20 backdrop-blur-md shadow-[0_0_16px_rgba(105,55,158,0.2)]">
+              <span class="relative flex h-2.5 w-2.5">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary"></span>
+              </span>
+              <span class="font-label-md text-label-md text-on-surface tracking-wide">Yeni Projelere Açık — İstanbul</span>
+            </div>
+
+            <h1 class="font-display-hero text-headline-xl-mobile sm:text-headline-xl lg:text-display-hero text-white tracking-tight leading-none font-extrabold max-w-3xl drop-shadow-[0_4px_24px_rgba(0,0,0,0.65)]">
+              Markalara Dijital Kimlik &amp; Görsel Güç Kazandırıyorum.
+            </h1>
+
+            <p class="font-body-xl text-body-lg sm:text-body-xl text-on-surface-variant max-w-xl leading-relaxed drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)]">
+              <strong class="text-white font-semibold">Muharrem Ceylan (MULVN)</strong> — Grafik Tasarımcı &amp; UI/UX Mimarı. Kurumsal kimlik, yatırımcı sunumları, ambalaj, sosyal medya ve ödüllü modern arayüz ekosistemleri.
+            </p>
+
+            <div class="flex flex-wrap items-center gap-space-md pt-space-xs pointer-events-auto">
+              <a class="inline-flex items-center gap-space-xs px-space-xl py-space-sm rounded-full bg-gradient-to-r from-primary-container to-secondary-container text-white font-label-lg text-label-lg shadow-[0_0_32px_rgba(105,55,158,0.55)] hover:scale-105 hover:brightness-110 transition-all duration-300" href="#vaka-analizleri">
+                <span>Projeleri İncele</span>
+                <span class="material-symbols-outlined text-[18px]">south_east</span>
+              </a>
+              <button type="button" onclick="triggerCvDownload()" class="inline-flex items-center gap-space-xs px-space-lg py-space-sm rounded-full bg-surface-container/70 hover:bg-surface-container-high border border-primary-container/35 text-white font-label-lg text-label-lg backdrop-blur-md hover:border-primary/60 transition-all duration-200">
+                <span class="material-symbols-outlined text-[18px] text-primary">download</span>
+                <span>CV İndir (PDF)</span>
+              </button>
+            </div>
+
+            <div class="pt-space-md flex flex-col gap-space-xs w-full pointer-events-auto">
+              <span class="font-label-sm text-label-sm uppercase tracking-widest text-outline">Temel Araç Kiti &amp; Yetkinlikler</span>
+              <div class="flex flex-wrap items-center gap-space-sm">
+                <div class="flex items-center gap-space-xs px-space-sm py-space-xs rounded-lg bg-surface-container-low/80 backdrop-blur-sm border border-primary-container/20 text-on-surface font-label-md text-label-md">
+                  <span class="material-symbols-outlined text-primary text-[16px]">draw</span><span>Adobe Illustrator</span>
+                </div>
+                <div class="flex items-center gap-space-xs px-space-sm py-space-xs rounded-lg bg-surface-container-low/80 backdrop-blur-sm border border-primary-container/20 text-on-surface font-label-md text-label-md">
+                  <span class="material-symbols-outlined text-tertiary text-[16px]">photo_library</span><span>Adobe Photoshop</span>
+                </div>
+                <div class="flex items-center gap-space-xs px-space-sm py-space-xs rounded-lg bg-surface-container-low/80 backdrop-blur-sm border border-primary-container/20 text-on-surface font-label-md text-label-md">
+                  <span class="material-symbols-outlined text-primary text-[16px]">web</span><span>Figma System</span>
+                </div>
+                <div class="flex items-center gap-space-xs px-space-sm py-space-xs rounded-lg bg-surface-container-low/80 backdrop-blur-sm border border-primary-container/20 text-on-surface font-label-md text-label-md">
+                  <span class="material-symbols-outlined text-secondary text-[16px]">graphic_eq</span><span>Adobe Audition</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="lg:col-span-4 hidden lg:flex items-center justify-end pointer-events-none"></div>
+        </div>
+      </section>
+
+      <!-- MARKA BAZLI VAKA ANALİZLERİ -->
+      <section class="w-full px-margin-sm md:px-margin-md lg:px-margin-xl py-space-2xl bg-surface-container-lowest/50 border-t border-b border-primary-container/20" id="vaka-analizleri">
+        <div class="max-w-7xl mx-auto flex flex-col gap-space-xl">
+
+          <div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md">
+            <div class="flex flex-col gap-space-xs max-w-2xl">
+              <div class="flex items-center gap-space-xs">
+                <span class="h-px w-8 bg-primary"></span>
+                <span class="font-label-md text-label-md uppercase tracking-widest text-primary font-bold">Marka Vitrini &amp; Kurumsal Projeler</span>
+              </div>
+              <h2 class="font-headline-xl text-headline-xl-mobile md:text-headline-xl text-white font-extrabold tracking-tight">Marka Bazlı Vaka Analizleri</h2>
+              <p class="font-body-lg text-body-lg text-on-surface-variant">Markaya özel görsel kimlik stratejileri, 9:16 dikey performans reklam hikayeleri, geniş web bannerları ve yatırımcı kurulu sunum tasarımları.</p>
+            </div>
+            <div class="flex flex-wrap items-center gap-space-xs self-start md:self-auto">
+              <button type="button" onclick="document.getElementById('local-folder-input').click()" class="inline-flex items-center gap-1.5 px-space-md py-space-xs rounded-full bg-primary-container/30 hover:bg-primary-container border border-primary/40 text-white font-label-md text-label-md transition-all">
+                <span class="material-symbols-outlined text-[16px] text-primary">upload_file</span>
+                <span>Klasörden Fotoğrafları Eşleştir</span>
+              </button>
+              <div class="flex items-center gap-space-xs px-space-md py-space-xs rounded-full bg-surface-container border border-primary/20 text-on-surface-variant font-label-md text-label-md">
+                <span class="relative flex h-2 w-2">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                </span>
+                <span class="text-primary font-bold">4 Aktif Marka</span>
+                <span class="text-outline">• 27 Tasarım</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Marka filtre sekmeleri -->
+          <div class="flex flex-wrap items-center gap-space-xs p-1.5 rounded-2xl sm:rounded-full bg-surface-container-low border border-primary-container/30 backdrop-blur-md self-start" id="brand-filter-bar">
+            <button type="button" data-brand-filter="all" class="brand-tab-btn px-space-md py-space-xs rounded-full bg-primary-container text-white font-label-md text-label-md shadow-[0_0_16px_rgba(105,55,158,0.5)] transition-all flex items-center gap-1.5"><span>Tüm Markalar (27)</span></button>
+            <button type="button" data-brand-filter="wiselab" class="brand-tab-btn px-space-md py-space-xs rounded-full text-on-surface-variant hover:text-white hover:bg-surface-container-high font-label-md text-label-md transition-all flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-tertiary"></span><span>WiseLab Supplement (11)</span></button>
+            <button type="button" data-brand-filter="gentili" class="brand-tab-btn px-space-md py-space-xs rounded-full text-on-surface-variant hover:text-white hover:bg-surface-container-high font-label-md text-label-md transition-all flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-primary"></span><span>Gentili Aesthetics (10)</span></button>
+            <button type="button" data-brand-filter="fpakademi" class="brand-tab-btn px-space-md py-space-xs rounded-full text-on-surface-variant hover:text-white hover:bg-surface-container-high font-label-md text-label-md transition-all flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-400"></span><span>FP Akademi (4)</span></button>
+            <button type="button" data-brand-filter="adanaocakbasi" class="brand-tab-btn px-space-md py-space-xs rounded-full text-on-surface-variant hover:text-white hover:bg-surface-container-high font-label-md text-label-md transition-all flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-amber-400"></span><span>Adana Ocakbaşı (2)</span></button>
+          </div>
+
+          <!-- MARKA 1: WISELAB -->
+          <div id="brand-section-wiselab" class="brand-block flex flex-col gap-space-lg transition-all duration-300">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md border-b border-primary-container/25 pb-space-md">
+              <div class="flex flex-col gap-space-xs">
+                <div class="flex flex-wrap items-center gap-space-xs">
+                  <span class="material-symbols-outlined text-secondary text-[22px]">verified</span>
+                  <h3 class="font-headline-md text-headline-md text-white font-bold">01. WiseLab Supplement — Kampanya Ekosistemi (11 Tasarım)</h3>
+                </div>
+                <p class="font-body-md text-body-md text-on-surface-variant max-w-3xl">
+                  Sağlık ve gıda takviyesi markası <strong class="text-white">WiseLab Supplement</strong> için hazırlanan 7 adet 9:16 dikey performans reklam hikayesi ve 4 adet geniş format web slider banner serisi.
+                </p>
+              </div>
+              <div class="flex flex-wrap items-center gap-1.5 p-1 rounded-xl sm:rounded-full bg-surface-container border border-primary-container/30 self-start md:self-auto" id="wiselab-subfilter-bar">
+                <button type="button" data-wiselab-format="all" class="wiselab-sub-btn px-3 py-1 rounded-full bg-secondary-container text-white font-label-sm text-label-sm shadow-sm transition-all">Tümü (11)</button>
+                <button type="button" data-wiselab-format="story" class="wiselab-sub-btn px-3 py-1 rounded-full text-on-surface-variant hover:text-white font-label-sm text-label-sm transition-all">9:16 Story (7)</button>
+                <button type="button" data-wiselab-format="web" class="wiselab-sub-btn px-3 py-1 rounded-full text-on-surface-variant hover:text-white font-label-sm text-label-sm transition-all">Web Banner (4)</button>
+              </div>
+            </div>
+
+            <div data-wiselab-group="story" class="wiselab-group flex flex-col gap-space-md">
+              <div class="flex items-center justify-between">
+                <span class="font-label-md text-label-md text-tertiary uppercase tracking-wider font-bold flex items-center gap-1.5">
+                  <span class="material-symbols-outlined text-[18px]">smartphone</span>
+                  <span>A. Dikey Story &amp; Sosyal Reklam Kreatifleri (9:16 • 7 Tasarım)</span>
+                </span>
+                <span class="font-label-sm text-label-sm text-outline hidden sm:inline">1080×1920 px • Meta &amp; TikTok Ads</span>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter" id="wiselab-story-grid"></div>
+            </div>
+
+            <div data-wiselab-group="web" class="wiselab-group flex flex-col gap-space-md pt-space-md">
+              <div class="flex items-center justify-between">
+                <span class="font-label-md text-label-md text-secondary uppercase tracking-wider font-bold flex items-center gap-1.5">
+                  <span class="material-symbols-outlined text-[18px]">desktop_windows</span>
+                  <span>B. Web Slider &amp; Masaüstü Hero Banner Serisi (Geniş Format • 4 Tasarım)</span>
+                </span>
+                <span class="font-label-sm text-label-sm text-outline hidden sm:inline">E-Ticaret Ana Sayfa Vitrinleri</span>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter" id="wiselab-web-grid"></div>
+            </div>
+          </div>
+
+          <!-- MARKA 2: GENTILI -->
+          <div id="brand-section-gentili" class="brand-block flex flex-col gap-space-lg pt-space-lg transition-all duration-300">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md border-b border-primary-container/25 pb-space-md">
+              <div class="flex flex-col gap-space-xs">
+                <div class="flex flex-wrap items-center gap-space-xs">
+                  <span class="material-symbols-outlined text-primary text-[22px]">co_present</span>
+                  <h3 class="font-headline-md text-headline-md text-white font-bold">02. Gentili Aesthetics — Kurumsal Yatırımcı &amp; Strateji Sunum Kiti (10 Slayt)</h3>
+                </div>
+                <p class="font-body-md text-body-md text-on-surface-variant max-w-3xl">
+                  İtalyan medikal estetik markası <strong class="text-white">Gentili Aesthetics</strong> için hazırlanan; editoryal yüksek kontrastlı serif tipografi, monokrom klinik portreler ve Stage-Gate yatırım karar matrislerinden oluşan 16:9 yönetim kurulu sunum serisi.
+                </p>
+              </div>
+              <button type="button" onclick="openLightbox('gentili', 0)" class="inline-flex items-center gap-space-xs px-space-lg py-space-xs rounded-full bg-primary-container hover:bg-inverse-primary text-white font-label-md text-label-md shadow-[0_0_20px_rgba(105,55,158,0.45)] transition-all self-start md:self-auto shrink-0">
+                <span class="material-symbols-outlined text-[18px]">slideshow</span>
+                <span>Sunumu Tam Ekran Başlat (1/10)</span>
+              </button>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-gutter" id="gentili-slides-grid"></div>
+          </div>
+
+          <!-- MARKA 3: FP AKADEMİ -->
+          <div id="brand-section-fpakademi" class="brand-block flex flex-col gap-space-lg pt-space-lg transition-all duration-300">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md border-b border-primary-container/25 pb-space-md">
+              <div class="flex flex-col gap-space-xs">
+                <div class="flex flex-wrap items-center gap-space-xs">
+                  <span class="material-symbols-outlined text-emerald-400 text-[22px]">precision_manufacturing</span>
+                  <h3 class="font-headline-md text-headline-md text-white font-bold">03. FP Akademi — Teknik Servis &amp; Eğitim Kampanya Serisi (4 Tasarım)</h3>
+                </div>
+                <p class="font-body-md text-body-md text-on-surface-variant max-w-3xl">
+                  Mobil cihaz donanım onarımı ve teknik uzmanlık akademisi <strong class="text-white">FP Akademi</strong> için hazırlanan; mikro donanım görselleri, teknik grid çizgileri ve mavi-zümrüt yeşili marka diliyle kurgulanan 9:16 dikey reklam serisi.
+                </p>
+              </div>
+              <button type="button" onclick="openLightbox('fpakademi', 0)" class="inline-flex items-center gap-space-xs px-space-lg py-space-xs rounded-full bg-surface-container-high hover:bg-primary-container text-white font-label-md text-label-md border border-primary/30 transition-all self-start md:self-auto shrink-0">
+                <span class="material-symbols-outlined text-[18px]">fullscreen</span>
+                <span>Seriyi İncele (1/4)</span>
+              </button>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter" id="fpakademi-grid"></div>
+          </div>
+
+          <!-- MARKA 4: ADANA OCAKBAŞI -->
+          <div id="brand-section-adanaocakbasi" class="brand-block flex flex-col gap-space-lg pt-space-lg transition-all duration-300">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md border-b border-primary-container/25 pb-space-md">
+              <div class="flex flex-col gap-space-xs">
+                <div class="flex flex-wrap items-center gap-space-xs">
+                  <span class="material-symbols-outlined text-amber-400 text-[22px]">auto_awesome</span>
+                  <h3 class="font-headline-md text-headline-md text-white font-bold">04. Adana Ocakbaşı Ataşehir — Özel Günler &amp; Kurumsal İletişim Serisi (2 Tasarım)</h3>
+                </div>
+                <p class="font-body-md text-body-md text-on-surface-variant max-w-3xl">
+                  <strong class="text-white">Adana Ocakbaşı Ataşehir</strong> için hazırlanan; dramatik ışık-gölge atmosferi, altın tonlu tipografik hiyerarşi ve kurumsal kimlik bütünlüğüne sahip 10 Kasım ve 29 Ekim Cumhuriyet Bayramı dikey sosyal medya tasarımları.
+                </p>
+              </div>
+              <button type="button" onclick="openLightbox('adanaocakbasi', 0)" class="inline-flex items-center gap-space-xs px-space-lg py-space-xs rounded-full bg-surface-container-high hover:bg-primary-container text-white font-label-md text-label-md border border-primary/30 transition-all self-start md:self-auto shrink-0">
+                <span class="material-symbols-outlined text-[18px]">fullscreen</span>
+                <span>Tasarımları İncele (1/2)</span>
+              </button>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter" id="adanaocakbasi-grid"></div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- TASARIM VİTRİNİ (orijinaldeki çift tekrar kaldırıldı) -->
+      <section class="w-full px-margin-sm md:px-margin-md lg:px-margin-xl py-space-2xl" id="tasarim-vitrini">
+        <div class="max-w-7xl mx-auto flex flex-col gap-space-xl">
+          <div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md">
+            <div class="flex flex-col gap-space-xs">
+              <div class="flex items-center gap-space-xs">
+                <span class="h-px w-8 bg-tertiary"></span>
+                <span class="font-label-md text-label-md uppercase tracking-widest text-tertiary font-bold">Çoklu Medya &amp; Format Kütüphanesi</span>
+              </div>
+              <h2 class="font-headline-xl text-headline-xl-mobile md:text-headline-xl text-white font-extrabold tracking-tight">Tasarım Vitrini &amp; Format Galerisi</h2>
+              <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Tüm markalardaki 27 tasarımın format bazlı (9:16 Story, Geniş Web Banner ve 16:9 Kurumsal Sunum) birleşik vitrini.</p>
+            </div>
+            <div class="flex flex-wrap items-center gap-space-xs p-1.5 rounded-2xl sm:rounded-full bg-surface-container-low border border-primary-container/30 backdrop-blur-md" id="showcase-filter-bar">
+              <button type="button" data-showcase-filter="all" class="showcase-tab-btn px-space-md py-space-xs rounded-full bg-primary-container text-white font-label-md text-label-md shadow-[0_0_16px_rgba(105,55,158,0.5)] transition-all">Tümü (27)</button>
+              <button type="button" data-showcase-filter="9:16 Story" class="showcase-tab-btn px-space-md py-space-xs rounded-full text-on-surface-variant hover:text-white hover:bg-surface-container-high font-label-md text-label-md transition-all">9:16 Story (13)</button>
+              <button type="button" data-showcase-filter="Web Banner" class="showcase-tab-btn px-space-md py-space-xs rounded-full text-on-surface-variant hover:text-white hover:bg-surface-container-high font-label-md text-label-md transition-all">Web Banner (4)</button>
+              <button type="button" data-showcase-filter="16:9 Sunum" class="showcase-tab-btn px-space-md py-space-xs rounded-full text-on-surface-variant hover:text-white hover:bg-surface-container-high font-label-md text-label-md transition-all">16:9 Sunum (10)</button>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter" id="showcase-grid"></div>
+        </div>
+      </section>
+
+      <!-- YETENEKLER -->
+      <section class="w-full px-margin-sm md:px-margin-md lg:px-margin-xl py-space-2xl bg-surface-container-lowest/60 border-t border-b border-primary-container/20" id="yetenekler">
+        <div class="max-w-7xl mx-auto flex flex-col gap-space-xl">
+          <div class="flex flex-col gap-space-xs text-center items-center">
+            <span class="px-space-md py-space-xs rounded-full bg-secondary-container/40 text-tertiary-fixed font-label-md text-label-md">Yetkinlik Mimarisi</span>
+            <h2 class="font-headline-xl text-headline-xl-mobile md:text-headline-xl text-white font-extrabold tracking-tight">Yetenekler, Yazılım &amp; Saha İstatistikleri</h2>
+            <p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">Fikir aşamasından son piksel ve baskı prova denetimine kadar disiplinler arası yetkinlik haritası.</p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter-lg">
+            <div class="md:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+              <div class="p-space-lg rounded-2xl bg-surface-container/70 border border-primary-container/20 backdrop-blur-md flex flex-col gap-space-xs hover:border-primary/40 transition-colors">
+                <span class="material-symbols-outlined text-primary text-[28px]">token</span>
+                <h4 class="font-headline-sm text-headline-sm text-white font-bold pt-space-xs">Kurumsal Kimlik</h4>
+                <p class="font-body-md text-body-md text-on-surface-variant">Amblem, logo sistemi, marka kılavuzu, tipografi hiyerarşisi ve kurumsal kırtasiye tasarımı.</p>
+              </div>
+              <div class="p-space-lg rounded-2xl bg-surface-container/70 border border-primary-container/20 backdrop-blur-md flex flex-col gap-space-xs hover:border-tertiary/40 transition-colors">
+                <span class="material-symbols-outlined text-tertiary text-[28px]">devices</span>
+                <h4 class="font-headline-sm text-headline-sm text-white font-bold pt-space-xs">UI/UX &amp; Prototipleme</h4>
+                <p class="font-body-md text-body-md text-on-surface-variant">Kullanıcı akışları, tel kafes (wireframe), tasarım kütüphaneleri ve interaktif Figma prototipleri.</p>
+              </div>
+              <div class="p-space-lg rounded-2xl bg-surface-container/70 border border-primary-container/20 backdrop-blur-md flex flex-col gap-space-xs hover:border-secondary/40 transition-colors">
+                <span class="material-symbols-outlined text-secondary text-[28px]">package_2</span>
+                <h4 class="font-headline-sm text-headline-sm text-white font-bold pt-space-xs">Ambalaj &amp; Baskı</h4>
+                <p class="font-body-md text-body-md text-on-surface-variant">Bıçak izi hazırlığı, folyo/lak baskı öncesi prova yönetimi ve 3D ambalaj görselleştirme.</p>
+              </div>
+              <div class="p-space-lg rounded-2xl bg-surface-container/70 border border-primary-container/20 backdrop-blur-md flex flex-col gap-space-xs hover:border-primary/40 transition-colors">
+                <span class="material-symbols-outlined text-primary text-[28px]">campaign</span>
+                <h4 class="font-headline-sm text-headline-sm text-white font-bold pt-space-xs">Sosyal Medya &amp; Reklam</h4>
+                <p class="font-body-md text-body-md text-on-surface-variant">Meta/Google performans reklam kreatifleri, grid post şablonları ve dinamik banner setleri.</p>
+              </div>
+            </div>
+
+            <div class="md:col-span-6 p-space-lg rounded-2xl bg-surface-container/80 border border-primary-container/30 backdrop-blur-xl flex flex-col justify-between gap-space-md">
+              <div class="flex items-center justify-between">
+                <h4 class="font-headline-sm text-headline-sm text-white font-bold">Yazılım Uzmanlığı &amp; Teknik Araçlar</h4>
+                <span class="font-label-sm text-label-sm text-primary uppercase tracking-wider">Haftalık 50+ Saat Aktif</span>
+              </div>
+
+              <div class="flex flex-col gap-space-md" id="skills-bars-container">
+                <div class="flex flex-col gap-1.5">
+                  <div class="flex justify-between font-label-md text-label-md">
+                    <span class="text-white font-semibold flex items-center gap-1.5"><span class="material-symbols-outlined text-[16px] text-primary">design_services</span>Figma (Design Systems, Auto-Layout, Variables)</span>
+                    <span class="text-primary font-bold">98%</span>
+                  </div>
+                  <div class="w-full h-2 rounded-full bg-surface-container-high overflow-hidden">
+                    <div data-target-width="98%" class="skill-progress-bar h-full rounded-full bg-gradient-to-r from-primary-container to-primary w-0 transition-all duration-1000 ease-out shadow-[0_0_8px_rgba(219,184,255,0.4)]"></div>
+                  </div>
+                </div>
+                <div class="flex flex-col gap-1.5">
+                  <div class="flex justify-between font-label-md text-label-md">
+                    <span class="text-white font-semibold flex items-center gap-1.5"><span class="material-symbols-outlined text-[16px] text-secondary">brush</span>Adobe Illustrator (Vektörel Çizim &amp; Ambalaj)</span>
+                    <span class="text-secondary font-bold">95%</span>
+                  </div>
+                  <div class="w-full h-2 rounded-full bg-surface-container-high overflow-hidden">
+                    <div data-target-width="95%" class="skill-progress-bar h-full rounded-full bg-gradient-to-r from-secondary-container to-secondary w-0 transition-all duration-1000 ease-out"></div>
+                  </div>
+                </div>
+                <div class="flex flex-col gap-1.5">
+                  <div class="flex justify-between font-label-md text-label-md">
+                    <span class="text-white font-semibold flex items-center gap-1.5"><span class="material-symbols-outlined text-[16px] text-tertiary">tune</span>Adobe Photoshop (Manipülasyon &amp; Renk Ayrımı)</span>
+                    <span class="text-tertiary font-bold">92%</span>
+                  </div>
+                  <div class="w-full h-2 rounded-full bg-surface-container-high overflow-hidden">
+                    <div data-target-width="92%" class="skill-progress-bar h-full rounded-full bg-gradient-to-r from-tertiary-container to-tertiary w-0 transition-all duration-1000 ease-out"></div>
+                  </div>
+                </div>
+                <div class="flex flex-col gap-1.5">
+                  <div class="flex justify-between font-label-md text-label-md">
+                    <span class="text-white font-semibold flex items-center gap-1.5"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">mic</span>Adobe Audition (Ses Tasarımı &amp; Podcast Mastering)</span>
+                    <span class="text-on-surface-variant font-bold">85%</span>
+                  </div>
+                  <div class="w-full h-2 rounded-full bg-surface-container-high overflow-hidden">
+                    <div data-target-width="85%" class="skill-progress-bar h-full rounded-full bg-outline-variant w-0 transition-all duration-1000 ease-out"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="pt-space-xs flex items-center gap-space-xs text-outline font-label-sm text-label-sm">
+                <span class="material-symbols-outlined text-[16px] text-primary">verified</span>
+                <span>Baskı öncesi CMYK profilleri, Pantone ve SVG/W3C kodlama uyumluluğu.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-gutter">
+            <div class="p-space-lg rounded-2xl bg-surface-container/70 border border-primary-container/20 text-center flex flex-col items-center justify-center gap-1">
+              <span class="font-display-hero text-headline-xl lg:text-display-hero text-white font-extrabold leading-none">8+</span>
+              <span class="font-label-lg text-label-lg text-on-surface-variant font-medium">Yıl Tasarım Deneyimi</span>
+            </div>
+            <div class="p-space-lg rounded-2xl bg-surface-container/70 border border-primary-container/20 text-center flex flex-col items-center justify-center gap-1">
+              <span class="font-display-hero text-headline-xl lg:text-display-hero text-white font-extrabold leading-none">120+</span>
+              <span class="font-label-lg text-label-lg text-on-surface-variant font-medium">Tamamlanan Proje</span>
+            </div>
+            <div class="p-space-lg rounded-2xl bg-surface-container/70 border border-primary-container/20 text-center flex flex-col items-center justify-center gap-1">
+              <span class="font-display-hero text-headline-xl lg:text-display-hero text-white font-extrabold leading-none">35+</span>
+              <span class="font-label-lg text-label-lg text-on-surface-variant font-medium">Mutlu Marka &amp; Girişim</span>
+            </div>
+            <div class="p-space-lg rounded-2xl bg-surface-container/70 border border-primary-container/20 text-center flex flex-col items-center justify-center gap-1">
+              <span class="font-display-hero text-headline-xl lg:text-display-hero text-white font-extrabold leading-none">4</span>
+              <span class="font-label-lg text-label-lg text-on-surface-variant font-medium">Tasarım &amp; UI/UX Ödülü</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- İLETİŞİM -->
+      <section class="relative w-full px-margin-sm md:px-margin-md lg:px-margin-xl py-space-2xl overflow-hidden" id="iletisim">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-primary-container/25 blur-[150px] pointer-events-none -z-10"></div>
+
+        <div class="max-w-7xl mx-auto rounded-3xl bg-surface-container/90 border border-primary-container/40 backdrop-blur-2xl p-space-lg md:p-space-xl lg:p-space-2xl shadow-[0_20px_60px_rgba(0,15,34,0.9)]">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter-lg items-center">
+            <div class="lg:col-span-7 flex flex-col items-start gap-space-lg">
+              <div class="inline-flex items-center gap-space-xs px-space-sm py-space-xs rounded-full bg-secondary-container/50 text-secondary font-label-md text-label-md">
+                <span class="material-symbols-outlined text-[16px]">schedule_send</span>
+                <span>24 Saat İçinde Yanıt Garantisi</span>
+              </div>
+              <h2 class="font-display-hero text-headline-xl-mobile md:text-headline-xl text-white font-extrabold tracking-tight leading-tight">Bir Sonraki Büyük Fikrinizi Birlikte Hayata Geçirelim.</h2>
+              <p class="font-body-xl text-body-lg md:text-body-xl text-on-surface-variant max-w-xl">İster sıfırdan bir marka kimliği ve yatırımcı sunumu, ister küresel ölçekte bir dijital ürün arayüzü olsun; tasarım standartlarınızı zirveye taşıyalım.</p>
+
+              <div class="flex flex-col gap-space-sm w-full max-w-md pt-space-xs">
+                <a class="flex items-center justify-between p-space-md rounded-xl bg-surface-container-high/60 hover:bg-surface-container-high border border-primary-container/20 transition-all duration-200" href="mailto:info@muharremceylan.com">
+                  <div class="flex items-center gap-space-md">
+                    <div class="w-10 h-10 rounded-lg bg-primary-container/40 flex items-center justify-center"><span class="material-symbols-outlined text-primary text-[20px]">alternate_email</span></div>
+                    <div>
+                      <span class="font-label-sm text-label-sm text-outline block">E-Posta</span>
+                      <span class="font-label-lg text-label-lg text-white font-semibold">info@muharremceylan.com</span>
+                    </div>
+                  </div>
+                  <span class="material-symbols-outlined text-outline text-[18px]">arrow_outward</span>
+                </a>
+                <a class="flex items-center justify-between p-space-md rounded-xl bg-surface-container-high/60 hover:bg-surface-container-high border border-primary-container/20 transition-all duration-200" href="https://muharremceylan.com" target="_blank" rel="noopener noreferrer">
+                  <div class="flex items-center gap-space-md">
+                    <div class="w-10 h-10 rounded-lg bg-secondary-container/40 flex items-center justify-center"><span class="material-symbols-outlined text-secondary text-[20px]">language</span></div>
+                    <div>
+                      <span class="font-label-sm text-label-sm text-outline block">Resmi Portfolyo &amp; Stüdyo</span>
+                      <span class="font-label-lg text-label-lg text-white font-semibold">muharremceylan.com</span>
+                    </div>
+                  </div>
+                  <span class="material-symbols-outlined text-outline text-[18px]">arrow_outward</span>
+                </a>
+              </div>
+            </div>
+
+            <div class="lg:col-span-5 p-space-lg rounded-2xl bg-surface-container-low/90 border border-primary-container/30 backdrop-blur-xl shadow-xl flex flex-col gap-space-md">
+              <div class="flex items-center justify-between border-b border-surface-container pb-space-sm">
+                <h3 class="font-headline-sm text-headline-sm text-white font-bold">Hızlı Proje Talebi</h3>
+                <span class="font-label-sm text-label-sm text-tertiary">MULVN Studio</span>
+              </div>
+
+              <form id="contact-form" class="flex flex-col gap-space-sm">
+                <div class="flex flex-col gap-1">
+                  <label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Adınız &amp; Soyadınız</label>
+                  <input class="w-full px-space-md py-space-sm rounded-lg bg-surface border border-outline-variant/40 text-on-surface placeholder:text-outline font-body-md text-body-md focus:border-primary-container focus:outline-none focus:ring-2 focus:ring-primary-container/30 transition-all" placeholder="Örn. Kerem Yılmaz" required type="text">
+                </div>
+                <div class="flex flex-col gap-1">
+                  <label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Kurumsal E-Posta</label>
+                  <input class="w-full px-space-md py-space-sm rounded-lg bg-surface border border-outline-variant/40 text-on-surface placeholder:text-outline font-body-md text-body-md focus:border-primary-container focus:outline-none focus:ring-2 focus:ring-primary-container/30 transition-all" placeholder="ad@sirketiniz.com" required type="email">
+                </div>
+                <div class="flex flex-col gap-1">
+                  <label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Proje Tipi</label>
+                  <select class="w-full px-space-md py-space-sm rounded-lg bg-surface border border-outline-variant/40 text-on-surface font-body-md text-body-md focus:border-primary-container focus:outline-none focus:ring-2 focus:ring-primary-container/30 transition-all">
+                    <option value="uiux">UI/UX Web &amp; Mobil Tasarımı</option>
+                    <option value="keynote">Yatırımcı &amp; Kurumsal Sunum (Pitch Deck)</option>
+                    <option value="branding">Kurumsal Kimlik &amp; Amblem</option>
+                    <option value="packaging">Ambalaj &amp; Baskı Tasarımı</option>
+                    <option value="social">Sosyal Medya &amp; Reklam Seti</option>
+                  </select>
+                </div>
+                <div class="flex flex-col gap-1">
+                  <label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Proje Detayları &amp; Hedefler</label>
+                  <textarea class="w-full px-space-md py-space-sm rounded-lg bg-surface border border-outline-variant/40 text-on-surface placeholder:text-outline font-body-md text-body-md focus:border-primary-container focus:outline-none focus:ring-2 focus:ring-primary-container/30 transition-all" placeholder="Projenizin kapsamı, zaman çizelgesi ve beklentileriniz..." required rows="3"></textarea>
+                </div>
+
+                <div id="form-feedback" class="hidden p-space-sm rounded-xl bg-primary-container/30 border border-primary/40 text-on-surface font-body-md text-[13px] flex items-center gap-2">
+                  <span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+                  <span>Mesajınız başarıyla iletildi. Muharrem Ceylan sizinle 24 saat içinde iletişime geçecektir.</span>
+                </div>
+
+                <button class="w-full mt-space-xs py-space-sm rounded-full bg-gradient-to-r from-primary-container to-secondary-container hover:brightness-110 text-white font-label-lg text-label-lg shadow-[0_0_24px_rgba(105,55,158,0.5)] hover:scale-[1.01] transition-all flex items-center justify-center gap-space-xs" type="submit">
+                  <span>Mesaj Gönder</span>
+                  <span class="material-symbols-outlined text-[18px]">send</span>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="w-full bg-surface-container-lowest border-t border-primary-container/15">
+    <div class="w-full max-w-7xl mx-auto px-margin-sm md:px-margin-md lg:px-margin-xl pt-space-2xl pb-space-xl">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter-lg pb-space-2xl">
+        <div class="md:col-span-5 flex flex-col gap-space-md">
+          <div class="flex items-center font-headline-lg text-headline-lg text-on-surface font-bold">
+            <span class="tracking-wider">Muharrem Ceylan</span><span class="text-primary-container font-extrabold">.</span>
+          </div>
+          <p class="font-body-md text-body-md text-on-surface-variant max-w-sm">Muharrem Ceylan (MULVN) — Kurumsal markalar, küresel teknoloji girişimleri ve lüks medikal estetik markaları için yüksek standartlı Grafik Tasarım ve UI/UX Mimarlığı.</p>
+          <div class="flex items-center gap-space-sm pt-space-xs">
+            <span class="px-space-sm py-space-xs rounded-full bg-surface-container font-label-sm text-label-sm text-secondary">İstanbul &amp; Global</span>
+            <span class="px-space-sm py-space-xs rounded-full bg-surface-container font-label-sm text-label-sm text-secondary">Creative Direction</span>
+          </div>
+        </div>
+
+        <div class="md:col-span-3 flex flex-col gap-space-sm">
+          <span class="font-label-lg text-label-lg text-on-surface uppercase tracking-wider">Sosyal Ağlar</span>
+          <div class="flex flex-col gap-space-xs">
+            <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors duration-150" href="https://behance.net" target="_blank" rel="noopener noreferrer">Behance</a>
+            <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors duration-150" href="https://dribbble.com" target="_blank" rel="noopener noreferrer">Dribbble</a>
+            <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors duration-150" href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors duration-150" href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a>
+          </div>
+        </div>
+
+        <div class="md:col-span-4 flex flex-col gap-space-md p-space-lg rounded-xl bg-surface-container-low/70 border border-primary-container/20 backdrop-blur-md">
+          <span class="font-label-lg text-label-lg text-on-surface uppercase tracking-wider">Hızlı İletişim</span>
+          <p class="font-body-md text-body-md text-on-surface-variant">Yeni bir çeyrek veya seçkin bir marka vizyonu için doğrudan mesaj bırakın.</p>
+          <a class="inline-flex items-center justify-between px-space-md py-space-sm rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors duration-200" href="mailto:info@muharremceylan.com">
+            <span>info@muharremceylan.com</span>
+            <span class="material-symbols-outlined text-primary text-[18px]">arrow_forward</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="pt-space-lg border-t border-surface-container flex flex-col sm:flex-row items-center justify-between gap-space-md font-label-md text-label-md text-outline">
+        <p>© 2026 MULVN (Muharrem Ceylan). Tüm Hakları Saklıdır.</p>
+        <p class="text-on-surface-variant">Crafted with Scandinavian Precision &amp; Istanbul Energy</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- LIGHTBOX (orijinaldeki bozuk/artık "fb-headline" bloğu kaldırıldı) -->
+  <div id="lightbox-modal" class="fixed inset-0 z-50 hidden bg-[#000a17]/95 backdrop-blur-2xl flex flex-col justify-between p-4 sm:p-6 md:p-8 transition-opacity duration-200" role="dialog" aria-modal="true">
+    <div class="max-w-7xl mx-auto w-full flex items-center justify-between gap-4 border-b border-primary-container/25 pb-4">
+      <div class="flex flex-col">
+        <div class="flex items-center gap-2">
+          <span id="lightbox-badge" class="px-2.5 py-0.5 rounded-full bg-primary-container text-white font-label-sm text-label-sm uppercase tracking-wider">Gentili Aesthetics</span>
+          <span id="lightbox-counter" class="font-label-md text-label-md text-tertiary font-bold">Slayt 1 / 10</span>
+        </div>
+        <h3 id="lightbox-title" class="font-headline-md text-headline-sm md:text-headline-md text-white font-bold mt-1">Slayt Başlığı</h3>
+      </div>
+      <button type="button" onclick="closeLightbox()" aria-label="Kapat" class="w-10 h-10 rounded-full bg-surface-container-high hover:bg-primary-container text-white flex items-center justify-center border border-primary/30 transition-all">
+        <span class="material-symbols-outlined text-[22px]">close</span>
+      </button>
+    </div>
+
+    <div class="max-w-7xl mx-auto w-full flex-1 flex items-center justify-center relative my-4 overflow-hidden">
+      <button type="button" id="lightbox-prev" onclick="navigateLightbox(-1)" aria-label="Önceki Slayt" class="absolute left-1 sm:left-3 z-20 w-11 h-11 rounded-full bg-surface-container/90 hover:bg-primary-container text-white border border-primary/30 flex items-center justify-center shadow-lg transition-all">
+        <span class="material-symbols-outlined text-[24px]">chevron_left</span>
+      </button>
+
+      <div id="lightbox-stage" class="w-full h-full flex items-center justify-center px-12 sm:px-16">
+        <img id="lightbox-img" src="" alt="Önizleme" class="max-h-[70vh] max-w-full rounded-xl shadow-[0_20px_70px_rgba(0,0,0,0.85)] border border-primary-container/30 object-contain">
+      </div>
+
+      <button type="button" id="lightbox-next" onclick="navigateLightbox(1)" aria-label="Sonraki Slayt" class="absolute right-1 sm:right-3 z-20 w-11 h-11 rounded-full bg-surface-container/90 hover:bg-primary-container text-white border border-primary/30 flex items-center justify-center shadow-lg transition-all">
+        <span class="material-symbols-outlined text-[24px]">chevron_right</span>
+      </button>
+    </div>
+
+    <div class="max-w-7xl mx-auto w-full flex flex-col gap-3 border-t border-primary-container/25 pt-4">
+      <p id="lightbox-desc" class="font-body-md text-body-md text-on-surface-variant text-center max-w-3xl mx-auto"></p>
+      <div id="lightbox-thumbs" class="flex items-center justify-center gap-2 overflow-x-auto py-1"></div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="global-toast" class="fixed bottom-6 right-6 z-50 hidden px-space-lg py-space-sm rounded-2xl bg-surface-container-high border border-primary/50 text-white shadow-[0_10px_40px_rgba(0,0,0,0.6)] backdrop-blur-xl flex items-center gap-3">
+    <span class="material-symbols-outlined text-primary">description</span>
+    <span id="global-toast-text" class="font-label-md text-label-md">Muharrem Ceylan (MULVN) Portfolyo &amp; CV özeti hazırlanıyor...</span>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

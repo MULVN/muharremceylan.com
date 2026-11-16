@@ -316,35 +316,23 @@ function showToast(text, ms) {
 /* =========================================================
    4. KART OLUŞTURUCULAR
    ========================================================= */
-function buildBrandCardHTML(item, key, idx, brandLabel, accentClass, badgeBgClass, iconName) {
+function buildBrandCardHTML(item, key, idx) {
+  // Kartta yazı yok: yalnızca görsel. Tıklayınca tam ekran açılır.
   return `
-    <div onclick="openLightbox('${key}', ${idx})" class="cursor-pointer group rounded-2xl bg-surface-container/85 border border-primary-container/30 backdrop-blur-xl overflow-hidden flex flex-col justify-between hover:border-primary/70 transition-all duration-300 slide-card-hover shadow-xl">
-      <div class="relative w-full ${item.aspectClass} overflow-hidden bg-surface-container-lowest flex items-center justify-center">
+    <div onclick="openLightbox('${key}', ${idx})" onkeydown="if(event.key==='Enter'){openLightbox('${key}', ${idx})}" role="button" tabindex="0" aria-label="${item.title}"
+      class="cursor-pointer group rounded-2xl bg-surface-container/85 border border-primary-container/30 overflow-hidden hover:border-primary/70 transition-all duration-300 slide-card-hover shadow-xl">
+      <div class="relative w-full ${item.aspectClass} overflow-hidden bg-surface-container-lowest">
         <img src="${resolveInitialSrc(item)}" alt="${item.title}" loading="lazy" decoding="async"
           class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           onerror="handleImageError(this, '${key}', ${idx})">
-        <div class="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent opacity-85 pointer-events-none"></div>
-        <div class="absolute top-3 right-3 px-space-xs py-0.5 rounded bg-surface/85 text-white font-label-sm text-[10px] backdrop-blur-md border border-primary/25">${item.showcaseCat}</div>
-        <div class="absolute top-3 left-3 px-space-xs py-0.5 rounded ${badgeBgClass} text-white font-label-sm text-[10px] backdrop-blur-md">${brandLabel} #${item.slideNum}</div>
-        <div class="absolute bottom-0 inset-x-0 p-space-md bg-surface-container-lowest/85 backdrop-blur-md border-t border-primary-container/20 flex flex-col gap-1">
-          <span class="font-label-sm text-label-sm ${accentClass} font-semibold uppercase tracking-wider">${item.tag}</span>
-          <h4 class="font-headline-sm text-headline-sm text-white font-bold leading-tight">${item.title}</h4>
-          <p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 text-[12px]">${item.desc}</p>
+        <div class="absolute inset-0 bg-primary-container/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+          <span class="w-11 h-11 rounded-full bg-surface/90 text-white flex items-center justify-center shadow-lg border border-primary/40">
+            <span class="material-symbols-outlined text-[22px]">zoom_in</span>
+          </span>
         </div>
-      </div>
-      <div class="p-space-sm border-t border-surface-container-high flex items-center justify-between bg-surface-container-high/40">
-        <div class="flex items-center gap-1.5 text-outline font-label-sm text-label-sm">
-          <span class="material-symbols-outlined text-[16px] ${accentClass}">${iconName}</span>
-          <span>${item.dimensions}</span>
-        </div>
-        <span class="inline-flex items-center gap-1 px-space-sm py-0.5 rounded-full bg-primary-container/40 group-hover:bg-primary-container text-white font-label-sm text-label-sm transition-all">
-          <span>Tam Ekran</span>
-          <span class="material-symbols-outlined text-[14px]">fullscreen</span>
-        </span>
       </div>
     </div>`;
 }
-
 function renderWiseLabCards() {
   const storyGrid = document.getElementById('wiselab-story-grid');
   const webGrid = document.getElementById('wiselab-web-grid');
@@ -388,14 +376,6 @@ function renderGentiliSlides() {
                 <span class="material-symbols-outlined text-[24px]">slideshow</span>
               </span>
             </div>
-          </div>
-          <div class="p-space-md flex flex-col gap-2">
-            <span class="font-label-sm text-[11px] text-primary font-bold uppercase tracking-wider">Gentili Aesthetics • 16:9 Sunum</span>
-            <h4 class="font-headline-sm text-[16px] text-white font-bold leading-snug">Medikal Estetik İş Birimi — Yönetim Kurulu Strateji Sunumu</h4>
-            <p class="font-body-md text-[13px] text-on-surface-variant leading-relaxed">Üründen pazara uçtan uca yönetişim, Stage-Gate onay süreci, lansman planı, finans ve risk yönetimini kapsayan ${slides.length} slaytlık sunum.</p>
-            <span class="inline-flex items-center gap-1.5 self-start mt-1 px-space-md py-space-xs rounded-full bg-primary-container group-hover:bg-inverse-primary text-white font-label-md text-label-md transition-colors">
-              <span class="material-symbols-outlined text-[18px]">slideshow</span><span>Sunumu Aç</span>
-            </span>
           </div>
         </div>
       </div>

@@ -64,6 +64,7 @@ const gs = (file, num, title, desc) => slide({
 
 // Mobil uygulama ekranları ve web sitesi görselleri için yatay kartlar
 const app = (o) => ({ fallbackUrl: "", aspectClass: "aspect-[3/2]", dimensions: "2400×1600 px", showcaseCat: "Mobil UI", ...o, artConfig: art(o.art, 'wide') });
+const poster = (o) => ({ fallbackUrl: "", showcaseCat: "Poster", ...o, artConfig: art(o.art, 'story') });
 const webshot = (o) => ({ fallbackUrl: "", aspectClass: "aspect-[921/868]", dimensions: "921×868 px", showcaseCat: "Web Sitesi", ...o, artConfig: art(o.art, 'wide') });
 
 const portfolioCollections = {
@@ -296,7 +297,50 @@ const portfolioCollections = {
     app({ file: "musiumai-7.jpg", spanClass: "sm:col-span-2", art: ["#0c224e", "#020a18", "#38bdf8", "#ffffff", "MUSIUMAI", "Uygulama Simgesi", "Müze motifli logo", "MOBİL UI"],
       slideNum: "06", tag: "MusiumAI • Uygulama Simgesi",
       title: "MusiumAI — Uygulama Simgesi",
-      desc: "Müze binası ve 'M' harfini birleştiren uygulama simgesi." })
+      desc: "Müze binası ve 'M' harfini birleştiren uygulama simgesi." }),
+    app({ file: "musiumai-brosur-1.jpg", spanClass: "sm:col-span-2", aspectClass: "aspect-[1800/1273]", dimensions: "1800×1273 px",
+      art: ["#1b1a1f", "#2c2b35", "#5eb3dc", "#ffffff", "MUSIUMAI", "Bitirme Projesi", "Broşür kapağı", "BROŞÜR"],
+      slideNum: "07", tag: "MusiumAI • Broşür",
+      title: "MusiumAI — Broşür (Kapak)",
+      desc: "Bitirme projesi için hazırlanan broşürün kapağı." }),
+    app({ file: "musiumai-brosur-2.jpg", spanClass: "sm:col-span-2", aspectClass: "aspect-[1800/1273]", dimensions: "1800×1273 px",
+      art: ["#1b1a1f", "#2c2b35", "#5eb3dc", "#ffffff", "MUSIUMAI", "Sanatın Dijital Evreni", "Kullanıcı yolculuğu", "BROŞÜR"],
+      slideNum: "08", tag: "MusiumAI • Broşür",
+      title: "MusiumAI — Broşür (İç Sayfa)",
+      desc: "Tarama, tanımlama, keşfetme ve ödüllendirme adımlarını anlatan kullanıcı yolculuğu." }),
+    app({ file: "musiumai-poster.jpg", spanClass: "sm:col-span-2 sm:max-w-md sm:mx-auto w-full", aspectClass: "aspect-[1400/1960]", dimensions: "1400×1960 px",
+      art: ["#050a1f", "#0b1c4a", "#5eead4", "#ffffff", "MUSIUMAI", "Sanatın Zekayla Buluştuğu Noktada", "Mobil uygulama posteri", "POSTER"],
+      slideNum: "09", tag: "MusiumAI • Poster",
+      title: "MusiumAI — Poster",
+      desc: "'Sanatın Zekayla Buluştuğu Noktada' sloganlı uygulama tanıtım posteri." })
+  ],
+
+  posterler: [
+    poster({ file: "poster-1.jpg", aspectClass: "aspect-[1400/1986]", dimensions: "1400×1986 px",
+      art: ["#ffffff", "#e5e5e5", "#111111", "#111111", "OKUYABİLİYORUM", "Sizin dokunamadığınız gibi", "Biz de göremiyoruz", "POSTER"],
+      slideNum: "01", tag: "Poster • Okuyabiliyorum",
+      title: "Okuyabiliyorum — Braille Afişi",
+      desc: "Braille noktalarıyla yazılmış 'OKUYABİLİYORUM' kelimesiyle görme engelli okurlara dikkat çeken tipografik afiş." }),
+    poster({ file: "poster-2.jpg", aspectClass: "aspect-[1400/1986]", dimensions: "1400×1986 px",
+      art: ["#d8d3c8", "#b9b2a2", "#8b6a2b", "#1a1a1a", "POSTA SANATI", "Bir Varmış Bir Yokmuş", "II. Uluslararası Posta Sanatı Sergisi", "POSTER"],
+      slideNum: "02", tag: "Poster • Posta Sanatı Sergisi",
+      title: "II. Uluslararası Posta Sanatı Sergisi",
+      desc: "Kahramanmaraş Büyükşehir Belediyesi'nin düzenlediği sergi için hazırlanan, pul çerçeveli dijital posta sanatı çalışması (17 Aralık 2022)." }),
+    poster({ file: "poster-3.jpg", aspectClass: "aspect-[1400/1986]", dimensions: "1400×1986 px",
+      art: ["#d9d6d2", "#bdb8b2", "#c2371a", "#111111", "İSTANBUL MÜZİK FESTİVALİ", "53. İstanbul Müzik Festivali", "20 Mayıs – 10 Haziran 2025", "POSTER"],
+      slideNum: "03", tag: "Poster • İstanbul Müzik Festivali",
+      title: "53. İstanbul Müzik Festivali Afişi",
+      desc: "Kemanın gövdesinde şehir silüeti ve nota kıvrımları bir araya geliyor." }),
+    poster({ file: "poster-4.jpg", aspectClass: "aspect-[1400/2240]", dimensions: "1400×2240 px",
+      art: ["#ffffff", "#1d1a8a", "#1d1a8a", "#ffffff", "LEX COURTS", "No Just, Ex Lex", "Justice Unites Us", "POSTER"],
+      slideNum: "04", tag: "Poster • Lex Courts",
+      title: "Lex Courts — No Just, Ex Lex",
+      desc: "Beyaz ve lacivert iki yarıya bölünmüş kompozisyonda kılıç ile terazinin buluştuğu afiş." }),
+    poster({ file: "poster-5.jpg", aspectClass: "aspect-[1400/2250]", dimensions: "1400×2250 px",
+      art: ["#26358f", "#1d2a73", "#38bdf8", "#ffffff", "LEX COURTS", "Cigarettes After Lex", "Justice Unites Us", "POSTER"],
+      slideNum: "05", tag: "Poster • Lex Courts",
+      title: "Lex Courts — Cigarettes After Lex",
+      desc: "Lacivert zeminde iri tipografi ve küllükteki sigara illüstrasyonuyla hazırlanan afiş." })
   ],
 
   subapsan: [
@@ -465,6 +509,11 @@ function renderNewBrands() {
     musiumGrid.innerHTML = portfolioCollections.musiumai.map((item, idx) =>
       buildBrandCardHTML(item, 'musiumai', idx)).join('');
   }
+  const posterGrid = document.getElementById('posterler-grid');
+  if (posterGrid) {
+    posterGrid.innerHTML = portfolioCollections.posterler.map((item, idx) =>
+      buildBrandCardHTML(item, 'posterler', idx)).join('');
+  }
   const subapsanGrid = document.getElementById('subapsan-grid');
   if (subapsanGrid) {
     subapsanGrid.innerHTML = portfolioCollections.subapsan.map((item, idx) =>
@@ -530,7 +579,8 @@ function initBrandFilters() {
     adanaocakbasi: document.getElementById('brand-section-adanaocakbasi'),
     zeytin: document.getElementById('brand-section-zeytin'),
     musiumai: document.getElementById('brand-section-musiumai'),
-    subapsan: document.getElementById('brand-section-subapsan')
+    subapsan: document.getElementById('brand-section-subapsan'),
+    posterler: document.getElementById('brand-section-posterler')
   };
 
   buttons.forEach(btn => btn.addEventListener('click', () => {

@@ -62,6 +62,10 @@ const gs = (file, num, title, desc) => slide({
   art: ["#f4f4f2", "#e5e5e0", "#18181b", "#111111", "GENTILI AESTHETICS • SLIDE " + num, title.slice(0, 44), "Documento di discussione", "16:9 SUNUM"]
 });
 
+// Mobil uygulama ekranları ve web sitesi görselleri için yatay kartlar
+const app = (o) => ({ fallbackUrl: "", aspectClass: "aspect-[3/2]", dimensions: "2400×1600 px", showcaseCat: "Mobil UI", ...o, artConfig: art(o.art, 'wide') });
+const webshot = (o) => ({ fallbackUrl: "", aspectClass: "aspect-[921/868]", dimensions: "921×868 px", showcaseCat: "Web Sitesi", ...o, artConfig: art(o.art, 'wide') });
+
 const portfolioCollections = {
   wiselab: [
     story({
@@ -253,6 +257,59 @@ const portfolioCollections = {
       desc: "Dramatik ışık hüzmesi, ikonik tarihi portre ve altın çizgi detaylarıyla kurgulanan kurumsal Cumhuriyet Bayramı kreatifi." })
   ],
 
+  zeytin: [
+    story({ file: "zeytin.png", art: ["#e9e9e9", "#d6d6d2", "#6b7a2e", "#1a1a1a", "ZEYTİN BOSTANCI", "Her Çatalda Taze Bir Lezzet", "Akıp giden günün yorgunluğunu unutturan sofra", "9:16 STORY"],
+      slideNum: "01", tag: "Zeytin Bostancı • Story",
+      title: "Zeytin Bostancı Lezzet Story",
+      desc: "Açık gri zemin üzerinde eğik kadrajlı yemek fotoğrafları ve sade tipografiyle hazırlanan marka hikayesi." }),
+    story({ file: "rezerve 2.jpg", art: ["#7c3f1d", "#3b2412", "#f5efdc", "#f5efdc", "ZEYTİN BOSTANCI", "Anın Tadını Çıkarmak İçin", "Zeytin dalı çerçeveli marka tanıtımı", "9:16 STORY"],
+      slideNum: "02", tag: "Zeytin Bostancı • Story",
+      title: "Zeytin Bostancı Mekân Tanıtım Story",
+      desc: "Rattan aydınlatmalı mekân fotoğrafı üzerine zeytin dalı illüstrasyonlu, süslü çerçeveli marka mesajı." }),
+    story({ file: "rezerve.jpg", art: ["#1c1c1c", "#3a3a3a", "#f1ece0", "#f1ece0", "ZEYTİN BOSTANCI", "Rezervasyon İçin", "Siyah-beyaz mekân fotoğrafı", "9:16 STORY"],
+      slideNum: "03", tag: "Zeytin Bostancı • Story",
+      title: "Zeytin Bostancı Rezervasyon Story",
+      desc: "Siyah-beyaz mekân ve zeytin dalı kompozisyonu üzerinde rezervasyon çağrısı." })
+  ],
+
+  musiumai: [
+    app({ file: "musiumai-1.jpg", spanClass: "sm:col-span-2", art: ["#0c224e", "#020a18", "#38bdf8", "#ffffff", "MUSIUMAI", "Kayıt, Ana Sayfa ve Tarama", "Sanat eseri tanıyan mobil uygulama", "MOBİL UI"],
+      slideNum: "01", tag: "MusiumAI • Mobil Uygulama",
+      title: "MusiumAI — Kayıt, Ana Sayfa ve Tarama Ekranları",
+      desc: "Sanat eserlerini kamerayla tarayıp yapay zekâ ile tanıyan mobil uygulamanın ana akışı." }),
+    app({ file: "musiumai-2.jpg", art: ["#0c224e", "#020a18", "#38bdf8", "#ffffff", "MUSIUMAI", "Kayıt Ol ve Giriş Yap", "Üyelik ekranları", "MOBİL UI"],
+      slideNum: "02", tag: "MusiumAI • Mobil Uygulama",
+      title: "MusiumAI — Kayıt Ol ve Giriş Yap Ekranları",
+      desc: "Heykel dokulu arka plan ve parlak mavi vurgularla hazırlanan üyelik ekranları." }),
+    app({ file: "musiumai-3.jpg", art: ["#0c224e", "#020a18", "#38bdf8", "#ffffff", "MUSIUMAI", "Profil ve Ayarlar", "Koleksiyon ve hesap yönetimi", "MOBİL UI"],
+      slideNum: "03", tag: "MusiumAI • Mobil Uygulama",
+      title: "MusiumAI — Profil ve Ayarlar Ekranları",
+      desc: "Seviye ve deneyim puanı gösteren profil ekranı ile hesap ve uygulama ayarları." }),
+    app({ file: "musiumai-5.jpg", art: ["#0c224e", "#020a18", "#38bdf8", "#ffffff", "MUSIUMAI", "Keşfetmeye Hazır mısın?", "Kamerayı aç, eseri tara", "MOBİL UI"],
+      slideNum: "04", tag: "MusiumAI • Mobil Uygulama",
+      title: "MusiumAI — Ana Sayfa Ekranı",
+      desc: "Tek dokunuşla eser taramayı başlatan ana ekran ve günün öne çıkan eserleri." }),
+    app({ file: "musiumai-6.jpg", art: ["#0c224e", "#020a18", "#38bdf8", "#ffffff", "MUSIUMAI", "Eser Taranıyor", "Kamera ile eser analizi", "MOBİL UI"],
+      slideNum: "05", tag: "MusiumAI • Mobil Uygulama",
+      title: "MusiumAI — Eser Tarama Ekranı",
+      desc: "Mavi tarama çerçevesi ve analiz bilgi kartıyla kamera ekranı." }),
+    app({ file: "musiumai-7.jpg", spanClass: "sm:col-span-2", art: ["#0c224e", "#020a18", "#38bdf8", "#ffffff", "MUSIUMAI", "Uygulama Simgesi", "Müze motifli logo", "MOBİL UI"],
+      slideNum: "06", tag: "MusiumAI • Uygulama Simgesi",
+      title: "MusiumAI — Uygulama Simgesi",
+      desc: "Müze binası ve 'M' harfini birleştiren uygulama simgesi." })
+  ],
+
+  subapsan: [
+    webshot({ file: "subapsan-1.jpg", art: ["#0b0b1a", "#2a0b1e", "#e11d48", "#ffffff", "SUBAPSAN", "Güçlü Bağlantılar", "Jant subabı ve talaşlı imalat", "WEB SİTESİ"],
+      slideNum: "01", tag: "Subapsan • Web Sitesi",
+      title: "Subapsan — Ana Sayfa",
+      desc: "Jant subabının parçalara ayrılıp birleştiği 3B hero animasyonlu kurumsal ana sayfa." }),
+    webshot({ file: "subapsan-2.jpg", art: ["#0b0b1a", "#2a0b1e", "#e11d48", "#ffffff", "SUBAPSAN", "Markamız", "Mühendislik gücü", "WEB SİTESİ"],
+      slideNum: "02", tag: "Subapsan • Web Sitesi",
+      title: "Subapsan — Markamız Bölümü",
+      desc: "Firma hikâyesi, vizyon ve üretim avantajlarını anlatan kurumsal bölüm." })
+  ],
+
   single: []
 };
 
@@ -320,7 +377,7 @@ function buildBrandCardHTML(item, key, idx) {
   // Kartta yazı yok: yalnızca görsel. Tıklayınca tam ekran açılır.
   return `
     <div onclick="openLightbox('${key}', ${idx})" onkeydown="if(event.key==='Enter'){openLightbox('${key}', ${idx})}" role="button" tabindex="0" aria-label="${item.title}"
-      class="cursor-pointer group rounded-2xl bg-surface-container/85 border border-primary-container/30 overflow-hidden hover:border-primary/70 transition-all duration-300 slide-card-hover shadow-xl">
+      class="cursor-pointer group rounded-2xl bg-surface-container/85 border border-primary-container/30 overflow-hidden hover:border-primary/70 transition-all duration-300 slide-card-hover shadow-xl ${item.spanClass || ''}">
       <div class="relative w-full ${item.aspectClass} overflow-hidden bg-surface-container-lowest">
         <img src="${resolveInitialSrc(item)}" alt="${item.title}" loading="lazy" decoding="async"
           class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
@@ -392,6 +449,21 @@ function renderNewBrands() {
     adanaGrid.innerHTML = portfolioCollections.adanaocakbasi.map((item, idx) =>
       buildBrandCardHTML(item, 'adanaocakbasi', idx, 'Adana Ocakbaşı', 'text-amber-400', 'bg-amber-800/90', 'auto_awesome')).join('');
   }
+  const zeytinGrid = document.getElementById('zeytin-grid');
+  if (zeytinGrid) {
+    zeytinGrid.innerHTML = portfolioCollections.zeytin.map((item, idx) =>
+      buildBrandCardHTML(item, 'zeytin', idx)).join('');
+  }
+  const musiumGrid = document.getElementById('musiumai-grid');
+  if (musiumGrid) {
+    musiumGrid.innerHTML = portfolioCollections.musiumai.map((item, idx) =>
+      buildBrandCardHTML(item, 'musiumai', idx)).join('');
+  }
+  const subapsanGrid = document.getElementById('subapsan-grid');
+  if (subapsanGrid) {
+    subapsanGrid.innerHTML = portfolioCollections.subapsan.map((item, idx) =>
+      buildBrandCardHTML(item, 'subapsan', idx)).join('');
+  }
 }
 
 function renderUnifiedShowcaseGrid() {
@@ -449,7 +521,10 @@ function initBrandFilters() {
     wiselab: document.getElementById('brand-section-wiselab'),
     gentili: document.getElementById('brand-section-gentili'),
     fpakademi: document.getElementById('brand-section-fpakademi'),
-    adanaocakbasi: document.getElementById('brand-section-adanaocakbasi')
+    adanaocakbasi: document.getElementById('brand-section-adanaocakbasi'),
+    zeytin: document.getElementById('brand-section-zeytin'),
+    musiumai: document.getElementById('brand-section-musiumai'),
+    subapsan: document.getElementById('brand-section-subapsan')
   };
 
   buttons.forEach(btn => btn.addEventListener('click', () => {

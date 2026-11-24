@@ -300,12 +300,19 @@ const portfolioCollections = {
   ],
 
   subapsan: [
-    // Hareketli GIF: sayfa kaydırıldıkça 3B jant subabının parçalara ayrılıp birleşmesi
-    webshot({ file: "subapsan-hero.gif", animated: true, aspectClass: "aspect-[1568/736]", dimensions: "1568×736 px (animasyon)",
-      art: ["#0b0b1a", "#2a0b1e", "#e11d48", "#ffffff", "SUBAPSAN", "Güçlü Bağlantılar", "Jant subabı ve talaşlı imalat", "WEB SİTESİ"],
-      slideNum: "01", tag: "Subapsan • Web Sitesi",
-      title: "Subapsan — Ana Sayfa (3B Montaj Animasyonu)",
-      desc: "Jant subabının parçalara ayrılıp conta, somun, iğne ve kapak ile birleştiği 3B kaydırma animasyonlu kurumsal ana sayfa." })
+    // Sitenin üst menüsündeki bölümler, menü sırasıyla
+    ...[
+      ["subapsan-1.jpg", "Anasayfa", "Güçlü bağlantılar: 3B jant subabı montaj animasyonlu karşılama ekranı."],
+      ["subapsan-2.jpg", "Kurumsal", "Firma hikâyesi, vizyon ve üretim avantajlarını anlatan bölüm."],
+      ["subapsan-3.jpg", "Üretimimiz", "Hammaddeden kargoya beş aşamalı üretim akışı."],
+      ["subapsan-4.jpg", "Hizmetler", "İş makinesi, otobüs/kamyon ve traktör jant subapları için hizmet kartları."],
+      ["subapsan-5.jpg", "Kalite", "ISO 9001:2015 kalite yönetim sistemi ve kalite politikası."],
+      ["subapsan-6.jpg", "Ürünler", "Kategori filtreli ürün yelpazesi ve teklif isteme kartları."],
+      ["subapsan-7.jpg", "Katalog", "Dijital ürün kataloğu bölümü."]
+    ].map(([file, name, desc], i) => webshot({ file, dimensions: "1568×736 px",
+      art: ["#0b0b1a", "#2a0b1e", "#e11d48", "#ffffff", "SUBAPSAN", name, "Kurumsal web sitesi", "WEB SİTESİ"],
+      slideNum: String(i + 1).padStart(2, "0"), tag: "Subapsan • " + name,
+      title: "Subapsan — " + name, desc, aspectClass: "aspect-[1568/736]" }))
   ],
 
   single: []

@@ -300,14 +300,12 @@ const portfolioCollections = {
   ],
 
   subapsan: [
-    webshot({ file: "subapsan-1.jpg", art: ["#0b0b1a", "#2a0b1e", "#e11d48", "#ffffff", "SUBAPSAN", "Güçlü Bağlantılar", "Jant subabı ve talaşlı imalat", "WEB SİTESİ"],
+    // Hareketli GIF: sayfa kaydırıldıkça 3B jant subabının parçalara ayrılıp birleşmesi
+    webshot({ file: "subapsan-hero.gif", animated: true, aspectClass: "aspect-[1568/736]", dimensions: "1568×736 px (animasyon)",
+      art: ["#0b0b1a", "#2a0b1e", "#e11d48", "#ffffff", "SUBAPSAN", "Güçlü Bağlantılar", "Jant subabı ve talaşlı imalat", "WEB SİTESİ"],
       slideNum: "01", tag: "Subapsan • Web Sitesi",
-      title: "Subapsan — Ana Sayfa",
-      desc: "Jant subabının parçalara ayrılıp birleştiği 3B hero animasyonlu kurumsal ana sayfa." }),
-    webshot({ file: "subapsan-2.jpg", art: ["#0b0b1a", "#2a0b1e", "#e11d48", "#ffffff", "SUBAPSAN", "Markamız", "Mühendislik gücü", "WEB SİTESİ"],
-      slideNum: "02", tag: "Subapsan • Web Sitesi",
-      title: "Subapsan — Markamız Bölümü",
-      desc: "Firma hikâyesi, vizyon ve üretim avantajlarını anlatan kurumsal bölüm." })
+      title: "Subapsan — Ana Sayfa (3B Montaj Animasyonu)",
+      desc: "Jant subabının parçalara ayrılıp conta, somun, iğne ve kapak ile birleştiği 3B kaydırma animasyonlu kurumsal ana sayfa." })
   ],
 
   single: []
@@ -321,6 +319,7 @@ const uploadedBlobMap = {};
 // Kartlarda küçük önizleme (images/thumb/…jpg), tam ekranda orijinal görsel kullanılır.
 function resolveInitialSrc(item) {
   const key = item.file.toLowerCase();
+  if (item.animated) return uploadedBlobMap[key] || ("images/" + encodeURI(item.file)); // GIF'in küçük kopyası yok, hareketi korunur
   const thumb = item.file + ".jpg"; // örn. "Artboard 3.png.jpg" (png/jpg adı çakışmasın)
   return uploadedBlobMap[key] || ("images/thumb/" + encodeURI(thumb));
 }
